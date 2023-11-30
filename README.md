@@ -4,15 +4,15 @@
 ## 1.1 基本构架flask+material design ok+
 ## 1.2 info模块侧栏引入 ok+
 ## 1.3 pdf读取转化k线功能 ok+
-金融管理系统2.0上线-10.24.2023
+# 金融管理系统2.0上线-10.24.2023
 ## 2.1 UI框架优化  ok+
 ## 2.2 加入OpenAI功能  ok+
 ## 2.3 docx文本转换功能  ok+
 ## 2.4 加入同花顺概念发布时间板块trend  ok+
-金融管理系统3.0上线-10.31.2023
+# 金融管理系统3.0上线-10.31.2023
 ## 3.1 星火大模型chat  ok+
 ## 3.2 pyecharts可视化  ok+
-金融管理系统4.0开发时间计划-11.1.2023
+# 金融管理系统4.0开发时间计划-11.1.2023
 https://github.com/xiaotudui/pytorch-tutorial
 ## 4.1大模型transformer应用 ok-
 ## 4.2 K线图优化设计 ok-
@@ -22,12 +22,12 @@ https://github.com/xiaotudui/pytorch-tutorial
 ### 4.5.1 基本功能整合 ok+
 ### 4.5.2 UI构架调整 ok
 ### 4.5.3 加入高校搜索功能 
-##4.6 mdui 2.0重构 ok
+## 4.6 mdui 2.0重构 ok
 ### 4.6.1 黑白模式 
 ### 4.6.2 color设计 
 ### 4.6.3 tips添加设计 ok
 ### 4.6.4 加入collapse模式 ok+
-##4.7 新闻阅读功能 ok+
+## 4.7 新闻阅读功能 ok+
 ### 4.7.1 卡片式阅读 ok+
 ### 4.7.2 大模型（4.0 prompt分析处理）
 ## 4.8 bug大修改 ok
