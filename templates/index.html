@@ -1,0 +1,214 @@
+{% extends "base.html" %}
+
+{% block page_content %}
+<head>
+    <!-- 引入Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+/>
+   <!--    animate音乐库-->
+<link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+<!--    howler音乐库-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.4/howler.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.4/howler.core.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.4/howler.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.4/howler.spatial.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<style>
+/* 默认的亮色模式样式 */
+.textfield-dark-theme {
+    background: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    border-radius: 4px;
+    padding: 1em;
+    border-bottom: 1px solid #bdbdbd;
+    color: #757575;
+}
+
+/* 暗色模式样式 */
+.mdui-theme-dark .textfield-dark-theme {
+    background: #333; /* 暗色背景 */
+    color: #ddd; /* 淡色文字 */
+    border-bottom: 1px solid #444; /* 暗色边框 */
+}
+
+/* 暗色模式下风车容器的样式 */
+.mdui-theme-dark .windmill-container {
+  background-color: #222222; /* 暗模式背景色 */
+  color: #fff; /* 文本颜色设置为白色 */
+}
+
+/* 用于风车图标的样式，确保它在暗模式下也可见 */
+.mdui-theme-dark .fa-ellipsis-vertical,
+.mdui-theme-dark .fa-fan {
+  color: #fff; /* 图标颜色设置为白色 */
+}
+
+
+.windmill-container {
+    position: absolute;
+    right: 0; /* 将绳子定位到头像容器的最右边 */
+    top: 70%; /* 将绳子垂直居中 */
+    transform: translateY(-50%); /* 使用变换向上移动自身高度的一半以完全居中 */
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+     animation: swing 3s ease-in-out infinite; /* 应用摆动动画 */
+     transform-origin: top; /* 设置旋转轴点为容器的顶部中心 */
+}
+.fa-ellipsis-vertical {
+    color: #333;
+    font-size: 20px;
+   display: block;
+   margin-bottom: 5px; /* 调整间距，使绳子和风车连续 */
+}
+}
+
+.windmill {
+ /* 风车的其他样式 */
+    margin-top: -5px; /* 可能需要调整以确保视觉上的连续性 */
+  display: inline-block;
+   position: relative;
+}
+
+@keyframes swing {
+  0%, 100% {
+    transform: translateY(-50%) rotate(-30deg); /* 添加原始的垂直偏移 */
+  }
+  50% {
+    transform: translateY(-50%) rotate(30deg);
+  }
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+
+</style>
+    </head>
+
+<!-- 音乐播放器元素 -->
+<audio id="audio-player" preload="auto">
+    <source src="{{ url_for('static', filename='audio/多多poi - 防晒.mp3') }}" type="audio/mpeg">
+</audio>
+
+<div class="mdui-container mt-4">
+    <div class="mdui-row">
+      <div class="mdui-col-md-12">
+        <div class="mdui-card">
+          <div class="mdui-card-header">
+            <img class="mdui-card-header-avatar"   src="{{ url_for('static', filename='reference/童老师.JPG') }}"/>
+            <div class="mdui-card-header-title">TONG</div>
+            <div class="mdui-card-header-subtitle">校长</div>
+              <!-- 风车音乐播放控制按钮 -->
+<div class="mdui-card-content windmill-container">
+    <i class="fa-solid fa-ellipsis-vertical" ></i>
+   <!-- 用作绳子的图标 -->
+    <button id="music-toggle" class="mdui-btn mdui-btn-icon windmill">
+       <i class="fa-solid fa-fan" ></i><!-- Font Awesome的风车图标 -->
+    </button>
+</div>
+          </div>
+
+        <!-- Swiper -->
+<div class="swiper-container mdui-card-media mdui-shadow-12">
+    <!-- Additional required wrapper -->
+    <div class="swiper-wrapper">
+        <!-- Slides -->
+        <div class="swiper-slide"><img src="{{ url_for('static', filename='reference/背景2.jpeg') }}" alt="Image 2"/></div>
+        <div class="swiper-slide"><img src="{{ url_for('static', filename='reference/背景1.jpeg') }}" alt="Image 3"/></div>
+         <div class="swiper-slide"><img src="{{ url_for('static', filename='reference/背景3.jpeg') }}" alt="Image 4"/></div>
+        <div class="swiper-slide"><img src="{{ url_for('static', filename='reference/背景4.jpeg') }}" alt="Image 4"/></div>
+
+        <!-- 更多图片 -->
+    </div>
+    <!-- 如果需要分页器 -->
+    <div class="swiper-pagination"></div>
+
+<!--    &lt;!&ndash; 如果需要导航按钮 &ndash;&gt;-->
+<!--    <div class="swiper-button-prev"></div>-->
+<!--    <div class="swiper-button-next"></div>-->
+</div>
+
+
+<script>
+  var swiper = new Swiper('.swiper-container', {
+    // Swiper的参数设置
+    spaceBetween: 30,
+    centeredSlides: true,
+    autoplay: {
+      delay: 1800,
+      disableOnInteraction: false,
+    },
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+    },
+<!--    navigation: {-->
+<!--      nextEl: '.swiper-button-next',-->
+<!--      prevEl: '.swiper-button-prev',-->
+<!--    },-->
+  });
+</script>
+
+
+          <div class="mdui-card-primary">
+            <div class="mdui-card-primary-title">金融数据分析系统</div>
+            <div class="mdui-card-primary-subtitle">Financial Analysis</div>
+          </div>
+          <div class="mdui-chip">
+      <span class="mdui-chip-icon mdui-color-blue"><i class="mdui-icon material-icons">face</i></span>
+      <span class="mdui-chip-title">子曰：</span>
+    </div>
+          <div class="mdui-card-content">「创业板不来20CM，不亦说乎？龙头战法而不为人知，而不愠，不亦君子乎？」
+          </div>
+
+<!-- Updated form to accept pasted text with Material Design style -->
+<div class="mdui-card-content">
+    <form method="post" enctype="application/x-www-form-urlencoded">
+        <div class="mdui-textfield mdui-textfield-floating-label textfield-dark-theme"  >
+            <label for="textData" class="mdui-textfield-label" style="color: #bdbdbd;">请在此粘贴红宝书信息（股票致富代码信息）</label>
+              <textarea id="textData" name="textData" class="mdui-textfield-input" rows="4" required ></textarea>
+        </div>
+        <mdui-button   style="width: 100%;" type="submit" class=" submit-button">提交</mdui-button>
+    </form>
+</div>
+
+    </div>
+      </div>
+    </div>
+</div>
+
+<script>
+var audioPlayer = document.getElementById('audio-player');
+var musicToggle = document.getElementById('music-toggle');
+
+musicToggle.onclick = function() {
+    if (audioPlayer.paused) {
+        audioPlayer.play();
+        this.classList.add('animate__rotateIn', 'animate__infinite'); // 添加旋转动画
+        this.style.animation = 'rotate 1s linear infinite'; // 应用旋转动画
+    } else {
+        audioPlayer.pause();
+        this.classList.remove('animate__rotateIn', 'animate__infinite');
+        this.style.animation = ''; // 移除旋转动画
+    }
+};
+</script>
+
+
+
+
+{% endblock %}

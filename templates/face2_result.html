@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block page_content %}
+<html lang="en">
+<head>
+    <style>
+        .green-text {
+            color: green;
+        }
+        .card-image {
+            width: 100%; /* 或者你想要的任何宽度 */
+            height: auto;
+            border-radius: 5px; /* 如果你想要圆角边框 */
+        }
+        .info-card {
+            margin-bottom: 15px;
+        }
+        .info-title {
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .info-value {
+            font-size: 14px;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <title>颜值可视化分析2</title>
+</head>
+<body>
+<div class="mdui-container">
+    <div class="mdui-card">
+        <div class="mdui-card-header">
+            <img class="mdui-card-header-avatar" src="{{ url_for('static', filename='reference/大美女2.jpg') }}"/>
+            <div class="mdui-card-header-title">人脸识别结果</div>
+            <div class="mdui-card-header-subtitle">Face Recognition Result</div>
+        </div>
+ <!-- 颜值分析结果标题 -->
+        <table class="mdui-table mdui-table-hoverable">
+            <thead>
+                <tr>
+
+                    <th>这位美女的颜值分析结果 </th>
+                    <th>Resultat von Aussehen der Schönen Frau</th>
+                </tr>
+            </thead>
+        </table>
+
+    <!-- 数据可视化的卡片 -->
+        <div class="mdui-card info-card">
+            <div class="mdui-card-content">
+                <p class="info-value">颜值结果: {{ similarity }}</p>
+            </div>
+        </div>
+
+
+ <!-- 展示上传照片的卡片 -->
+        <div class="mdui-card">
+            <!-- 插入上传的照片 -->
+            <div class="mdui-card-media">
+                <img class="card-image" src="{{ image_url }}" alt="Uploaded Image"/>
+            </div>
+        </div>
+
+<!-- 返回按钮 -->
+        <div class="mdui-card-actions">
+            <a href="{{ url_for('face2') }}" class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme">返回</a>
+        </div>
+
+
+
+
+    </div>
+</div>
+</body>
+</html>
+{% endblock %}

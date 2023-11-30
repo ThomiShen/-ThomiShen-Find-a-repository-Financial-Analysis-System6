@@ -1,0 +1,175 @@
+{% extends "base.html" %}
+
+{% block page_content %}
+<html>
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chimee/2.0.0-alpha.3/index.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chimee/2.0.0-alpha.3/index.browser.js"></script>
+     <!-- ... ... -->
+    <style>
+       /* 自定义居中图片的类 */
+        .center-image {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+    <title>AIGC-山海经大模型设计</title>
+</head>
+<body>
+  <div class="mdui-container">
+      <div class="mdui-card-header">
+            <img  class="mdui-card-header-avatar" src="{{ url_for('static', filename='shanhai/1.png') }}"/>
+            <div class="mdui-card-header-title">AIGC-山海经GPT教程大全 </div>
+            <div class="mdui-card-header-subtitle">SHANHAI STORY</div>
+        </div>
+      <div class="mdui-card">
+    <div class="mdui-prose" >
+        <h1 class="mdui-text-color-pink-500"> 一、文案设计</h1>
+<blockquote>
+    <p>● 确定主题：以山海经为主题，确定要表达的故事或场景。</p>
+    <p>● 编写文案：根据选定的主题创作具体的文本描述。这个描述应该足够详细，以便清楚地传达场景或故事。</p>
+     </blockquote>
+<h2>1.1 文案思路</h2>
+<p>将传统故事与现代元素结合，创造出独特而新颖的视觉体验。
+从多个角度探索同一故事，以增加故事的深度和复杂性。</p>
+<h2>  1.2 文案操作交互</h2>
+        <blockquote>
+聊天设计交互定义角色预设： </blockquote>
+<p>Q：我是一个刚开始研究山海经的人 现在假设您是山海经的历史专家 同时具备了绘画艺术的天赋</p>
+<p>A:了解到您对《山海经》有兴趣，这是一部非常古老和神秘的中国古籍，内容丰富，涵盖了地理、神话、生物、民俗等多个方面。如果您有任何具体的问题或者想要了解的方面，请告诉我，我会尽力为您提供信息。此外，如果您想要看到《山海经》中某个生物或场景的艺术描绘，我也可以帮助您生成一幅图画。请随时告诉我您的需求！</p>
+<p>Q：山海经的背景是怎么样的，有哪一些代表性的妖怪</p>
+ <blockquote>了解山海经的基本背景与主要人物（妖怪）</blockquote>
+<p>A：《山海经》是一部古老的中国文献，其成书时间普遍被认为是在战国至西汉时期。这部书不仅是一部地理志，还融合了历史、神话、民俗、宗教等多方面的内容。《山海经》的结构主要分为“山经”和“海经”，其中包含了大量神话传说中的山脉、河流、神灵、异兽等描述。
+在《山海经》中，描绘了许多奇异的生物和妖怪，这些生物往往具有独特的形象和特性，反映了古人对自然界和未知世界的想象。一些代表性的妖怪包括：
+        <li>1. 饕餮（Tāo Tiè）：一种以贪食著称的怪兽，通常被描绘成有着巨大的嘴和锋利的牙齿。</li>
+<li>2. 貔貅（Pí Xiū）：一种头似狮子，身上生有鳞片的神兽，传说它能够吞食一切恶灵和疾病。</li>
+<li>3. 九尾狐（Jiǔ Wěi Hú）：一种拥有九条尾巴的狐狸，常在中国神话传说中出现，代表着神秘和变化。</li>
+<li>4. 白泽（Bái Zé）：一种通晓妖怪之事的神兽，据说能够识别所有的妖魔鬼怪。</li>
+<li>5. 狰（Zhēng）：形似猛虎，头上长有犄角，象征着勇猛。</li></p>
+        <h1 class="mdui-text-color-blue-800">二、图像生成</h1>
+        <h2>2.1图片设计思路</h2>
+<p>将文本描述输入到 DALL-E3 中。确保描述具体、详细，以便 AI 准确理解并生成自己想要的图片
+    将文本描述输入到 DALL-E3 中。确保描述具体、详细，以便 AI 准确理解并生成自己想要的图片</p>
+        <p><b>1. 具体场景描述：</b>
+在描述文本中，详细描述场景的每一个方面，比如环境、时间、气氛、色彩等。例如，如果是描绘一种山海经中的神秘生物，详细描述其外观、颜色、大小，甚至可能的动作或表情。</p>
+<p><b>2. 情感与主题融入：</b>
+    在描述中加入情感和主题元素，比如神秘、庄严或诡异的氛围，使得生成的图像不仅是视觉上的呈现，还能传达特定的情感和主题。</p>
+<p><b>3. 文化元素的融合：</b>
+在描述中加入中国传统文化元素，比如古典建筑、服饰、符号等，以增强图像的文化内涵和深度。</p>
+<p><b>4. 细节的丰富性：</b>
+对于生物的特征、动作、与环境的互动等，给出更丰富的细节。比如，描述一种生物如何与周围的环境或其他生物互动。</p>
+<p><b>5. 创意的结合：</b>
+尝试结合现代元素或创意思维，比如把古代神话生物放置在现代城市背景中，创造出独特的视觉效果。</p>
+<p><b>6. 多次迭代与反馈：</b>
+在生成初步图像后，根据实际效果调整描述，通过多次迭代来逐步接近理想中的图像。</p>
+        <h2>2.2 图片生成操作</h2>
+        <h3>2.2.1 图像生成基础</h3>
+<p>前期可以进行交互信息喂养,在对话式生成图片以后，如果觉得某一张图片较为满意，可以提示ChatGPT，所要对应的种子seed是多少（seed为一个数字）？</p>
+<img class="mdui-hoverable mdui-shadow-12 center-image" src="{{url_for('static',filename='shanhai/1.png')}}" alt="Image 1"/>
+<p>Q：这个图片的seed是多少？</p>
+<p>A：这个图片的生成种子（seed）是 4003101323。这个种子号可以用来参考或重现类似的生成结果。</p>
+<p>Q:在这个种子的基础上进行修改，立在山巅 向山下吐火！</p>
+<p>A：这是根据您的要求重新创作的图像，其中《山海经》的灵感来的神话生物站在山顶，向下吐着红色的火焰。希望这个设计更加符合您的期望！</p>
+<img class="mdui-hoverable mdui-shadow-12 center-image" src="{{url_for('static',filename='shanhai/2.png')}}" alt="Image 2"/>
+        <h3>2.2.2 图像生成进阶</h3>
+        <pre class="mdui-text-color-blue-900">gen_id 和 $referenced_image_ids</pre>
+        <p>基于前面的设计上，我们只是基于提示词喂养给Dall-E3，但是没有对图像有一个精准化设计（人物图像和场景图像是不配套的），因此我们可以加入gen_id 作为参考图片ID，和$referenced_image_ids这个参数(用于人物图像和整合场景的整合，像PS图层一样，便于2者之间的调整)</p>
+        <p>在实际操作中，我们可以预先生成一个妖怪的样式图片（在对话交互中加入：<b>请在生成图片的同时，提供gen_id</b>）</p>
+     <p>后再生成一个相应的场景视频（我们可以不断的选择不同类型的场景风格，知道确定场景的基本基调），还是需要让GPT提供相对应的gen_id。</p>
+     <p>在获取得到了2个ID以后，我们可以通过$referenced_image_ids进行类型图片的拼接，例如：$referenced_image_ids：AXXXXXX,BXXXXXX</p>
+        <h1 class="mdui-text-color-purple-800">三、视频制作</h1>
+<p>制作AI视频的工具有很多，比较推荐的有PIKA和Runway旗下的GEN-2</p>
+        <h2>3.1 PIKA</h2>
+        <h3>3.1.1 PIKA设计打开</h3>
+<p>打开pika网站，通过转链接到discord中去，在已有的discord频道中添加本项目
+将生成的图片导入到 Pika 中去，通过提示词来得到视频。</p>
+<h3>3.1.2 GPT生成提示词</h3>
+<p>基于PIKA的提示词为英语，同时为专业短语，因此可以通过GPT来生成符合PIKA要求的提示词短语。</p>
+<img class="mdui-hoverable mdui-shadow-12 center-image" src="{{url_for('static',filename='shanhai/3.png')}}" alt="Image 3"/>
+<img class="mdui-hoverable mdui-shadow-12 center-image" src="{{url_for('static',filename='shanhai/4.png')}}" alt="Image 4"/>
+        <p>在经过了一个迭代的过程，可能需要多次调整和优化以达到最佳效果。
+            在generate中选择一个进行操作！</p>
+<img class="mdui-hoverable mdui-shadow-12 center-image" src="{{url_for('static',filename='shanhai/5.png')}}" alt="Image 5"/>
+        <p> 加入/create +prompt+{content}</p>
+<h2>3.2 GEN-2</h2>
+<H3>3.2.1 GEN-2访问</h3>
+<P>打开runway的网站，通过转链接到discord或者直接在官网页面中进行操作，以下内容都是在官网的操作</P>
+<img class="mdui-hoverable mdui-shadow-12 center-image" src="{{url_for('static',filename='shanhai/6.png')}}" alt="Image 6"/>
+        <P>点击左侧的按钮即可进入到GEN-2的操作网页中去</P>
+<img class="mdui-hoverable mdui-shadow-12 center-image" src="{{url_for('static',filename='shanhai/7.png')}}" alt="Image 7"/>
+        <P>在gen-2中可以看到 Text/Image to Video的选项，点击即可进行操作！</P>
+        <h3>3.2.2 GEN-2 应用</h3>
+        <p>在Gen-2的功能栏中，我们可以看到三个导航选项，基于我们已经通过Dall-E3已经生成了图像，接下来可以选择第三个IMAGE+DESCRIPTION（图像+描述词/提示语）</p>
+<img  class="mdui-hoverable mdui-shadow-12 center-image" src="{{url_for('static',filename='shanhai/8.png')}}" alt="Image 8"/>
+        <p>拖动已经生成的图片到图片框中，加上提示词语即可（提示词必须为英文，这是属于比较麻烦的一个问题，因此需要通过GPT进行文字工作的优化操作）生成视频</p>
+<img class="mdui-hoverable mdui-shadow-12 center-image" src="{{url_for('static',filename='shanhai/9.png')}}" alt="Image 9"/>
+       <p> 基于gen-2有自身提示词的原有 可以观察一些公开分享的提示词的语法与设计风格，不断调整我们要设计视频的提示词，同时也借助GPT进行二次优化</p>
+<img class="mdui-hoverable mdui-shadow-12 center-image"  src="{{url_for('static',filename='shanhai/10.png')}}" alt="Image 10"/>
+        <p>PS：图像格式要求为JPEG、JPG、PNG，因此有时候需要进行格式转换，格式转化操作在浏览器中有很多，比如<a href="https://www.iloveimg.com/zh-cn/convert-to-jpg">https://www.iloveimg.com/zh-cn/convert-to-jpg </a></p>
+        <h3>3.2.3 GEN-2 提示词优化</h3>
+<p>和GPT进行一轮交互交互</p>
+        <p>Q：我现在需要这个图像是巨龙张嘴吐气 海水不断移动 同时人物是双手合一 巨龙们开始喷火 给我绘制提示词谢谢</p>
+<p>A："在神秘莫测的海岸线上，巨龙从波涛汹涌的海水中崛起，其庞大的身躯覆盖着蓝绿色的鳞片，在太阳的照耀下闪烁着。它的头颅高昂，嘴巴缓缓张开，准备喷出火焰。海水在它的动作下起伏不定，海浪仿佛随着它的呼吸而生动起来。在巨龙的面前，一个人物双手合十，神态庄严，双眼闭合，似乎在进行古老的仪式。在这个动态视频中，巨龙将开始喷火，火焰在空中舞动，映照着人物坚定的面孔。同时，海水的动作将更加剧烈，波浪随着巨龙喷火的动作而加速移动，形成一个既危险又美丽的场景。"</p>
+<p>Q：请转化为英语 其中GEN-2最多只能接受320字母 请提供短语</p>
+<p>A："A dragon rises from churning seas, scales gleaming, poised to breathe fire. Waves heave with its breath. A figure stands before it, hands joined in an ancient rite, as flames begin to dance."
+This prompt is 219 characters long, ensuring it fits within the constraints of the GEN-2 tool while encapsulating the dynamic elements you want to portray in your video.</p></p>
+<img class="mdui-hoverable mdui-shadow-12 center-image" src="{{url_for('static',filename='shanhai/11.png')}}" alt="Image 11"/>
+        <p>Result：即可获取一个完整的视频内容！</p>
+<h2>3.3 视频背景音乐</h2>
+<p>针对山海经的设计，我们不仅需要设计视频动画的效果，同时需要加上动画的背景音乐
+应用网站为Mubert</p>
+<img class="mdui-hoverable mdui-shadow-12 center-image" src="{{url_for('static',filename='shanhai/12.png')}}" alt="Image 12"/>
+        <p>我们需要上传我们生成的图片，同时提供提示词，mubert网站提供了完整的提示词选项供我们选择（由于基于英语，我们可以通过浏览器的自动谷歌翻译功能，使文字转化为中文）</p>
+<p>关于提示词的生成上，我们可以先询问GPT进行提示词的生成</p>
+<p>Q：基于这张图，我希望创作气势奔波的既视感/一种波涛汹涌的既视感，体现了神兽君临天下的感觉!</p>
+<p>A:Based on the image and the feeling you want to evoke, here’s a suggestion for an audio track that would complement the visual and thematic elements:
+"Inspire awe with a soundscape of surging waves and regal might for a majestic beast. Use deep, resonant tones for the ocean's depths, powerful horn blasts to signify the dragon's dominion, and a steady, rumbling bass to give weight to its presence."</p>
+<p>Q:提示词是短语 一个个单词 不是句子 ，如上图片是官网给的一些实例短语（上传官网相关事例截图）</p>
+<p>A：Genres:  <b>Orchestral   Drumnbass  Breakbeat</b></p>
+<p>Moods: <b>Epic  Heroic   Tense</b></p>
+<p>Activities: <b> Battle  Fantasy</b></p>
+<p>You can mix and match these keywords in Mubert's interface to tailor the audio atmosphere to the dynamic and powerful scene you're envisioning. For instance, selecting 'Orchestral' from Genres, 'Epic' from Moods, and 'Battle' from Activities may yield a track that has the majestic and intense feeling you're looking for.</p>
+<h2>3.4 剪映制作</h2>
+<p>在获取了匹配的视频以及音频以后，我们通过国产软件“剪映”（cutcap）进行精细化编辑与处理，最后得到我们需要展现的实际效果</p>
+<p>打开剪映软件导入前面生成的视频和音频</p>
+<img  class="mdui-hoverable mdui-shadow-12 center-image" src="{{url_for('static',filename='shanhai/13.png')}}" alt="Image 13"/>
+        <p> 选择视频制作时，可以预设一个背景封面</p>
+        <img class="mdui-hoverable mdui-shadow-12 center-image" src="{{url_for('static',filename='shanhai/14.png')}}" alt="Image 14"/>
+        <p>之后分别拖入视频与音频</p>
+        <img class="mdui-hoverable mdui-shadow-12 center-image" src="{{url_for('static',filename='shanhai/15.png')}}" alt="Image 15"/>
+<p>经过一些调整与剪辑，最终可以生成合适的神话视频！</p>
+        <img class="mdui-hoverable mdui-shadow-12 center-image" src="{{url_for('static',filename='shanhai/16.png')}}" alt="Image 16"/>
+
+
+
+        <h1 class="mdui-text-color-cyan-800">设计软件：</h1>
+<P><B>ChatGPT-4.0、Dall-E3、PIKA </B></P>
+        <P><b>网址：</b> <a href="https://chat.openai.com">https://chat.openai.com</a><P>
+ <P><a href="https://www.pika.art">https://www.pika.art</a><P>
+ <P><a href="https://app.runwayml.com">https://app.runwayml.com</a><P>
+ <P><a href="https://mubert.com">https://mubert.com</a><P>
+
+    </div>
+      </div>
+ <div id="my-video"></div>
+
+</div>
+<script>
+  var player = new Chimee({
+    wrapper: '#my-video',
+    src: "{{url_for('static',filename='shanhai/神龙.MP4')}}",
+    autoplay: true,
+  controls: true,
+  playsInline: true,
+  preload: true,
+  x5VideoPlayerFullscreen: true,
+  x5VideoOrientation: true,
+  xWebkitAirplay: true,
+  muted: true
+  });
+</script>
+</body>
+</html>
+
+{% endblock %}

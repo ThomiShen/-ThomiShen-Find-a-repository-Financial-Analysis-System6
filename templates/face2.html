@@ -1,0 +1,131 @@
+{% extends "base.html" %}
+
+{% block page_content %}
+<html lang="en">
+<head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.26/webcam.min.js"></script>
+  <style>
+    .green-text {
+      color: green;
+    }
+    .upload-container {
+      border: 2px dashed #ccc;
+      border-radius: 5px;
+      padding: 20px;
+      text-align: center;
+      cursor: pointer;
+    }
+    .upload-container.dragover {
+      border-color: #000;
+    }
+
+
+  </style>
+  <meta charset="UTF-8">
+  <title>股票大数据可视化</title>
+</head>
+<body>
+<div class="mdui-container">
+    <div class="mdui-card">
+        <div class="mdui-card-header">
+            <img class="mdui-card-header-avatar" src="{{ url_for('static', filename='reference/大美女2.jpg') }}"/>
+            <div class="mdui-card-header-title">大美女颜值打分系统</div>
+            <div class="mdui-card-header-subtitle">Schöne Frau System</div>
+        </div>
+        <table class="mdui-table mdui-table-hoverable">
+            <thead>
+                <tr>
+                    <th>如下是中国计量大学的两大高质量美女！！！</th>
+
+                </tr>
+            </thead>
+        </table>
+    <!-- Image container -->
+
+
+        <div class="mdui-row">
+            <div class="mdui-col-xs-6">
+        <div class="mdui-card">
+                    <div class="mdui-card-media">
+                        <img src="{{ url_for('static', filename='beautygirls/yl.jpg') }}" alt="Image 1">
+                        <div class="mdui-card-media-covered">
+                            <div class="mdui-card-primary">
+                                <div class="mdui-card-primary-title">南方社科大美女</div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+          </div>
+            <div class="mdui-col-xs-6">
+        <div class="mdui-card">
+                    <div class="mdui-card-media">
+                        <img src="{{ url_for('static', filename='beautygirls/zyw.jpg') }}" alt="Image 2">
+                        <div class="mdui-card-media-covered">
+                            <div class="mdui-card-primary">
+                                <div class="mdui-card-primary-title">北方工科大美女</div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+          </div>
+       </div>
+
+        <div class="upload-container" id="uploadContainer">
+          拖放图片到这里，或者 <strong>点击选择本地文件</strong>
+          <form id="fileUploadForm" action="/face2" method="post" enctype="multipart/form-data" style="display: none;">
+            <input type="file" name="image" accept="image/*" id="fileInput">
+          </form>
+        </div>
+        <!-- 隐藏的文件输入元素 -->
+<!-- 隐藏的文件输入元素 -->
+<input type="file" id="cameraInput" name="image" accept="image/*" capture="user" style="display: none;"  onchange="submitPhoto()">
+ <mdui-button  style="width: 100%;" id="PhotoButton"   onclick="document.getElementById('cameraInput').click();">
+  自拍/PHOTO
+  <mdui-icon slot="icon" name="downloading"></mdui-icon>
+  <mdui-icon slot="end-icon" name="attach_file"></mdui-icon>
+</mdui-button>
+
+    </div>
+</div>
+</body>
+<script>
+          const uploadContainer = document.getElementById('uploadContainer');
+          const fileInput = document.getElementById('fileInput');
+          uploadContainer.addEventListener('click', () => fileInput.click());
+          fileInput.addEventListener('change', () => {
+            const form = document.getElementById('fileUploadForm');
+            form.submit();
+          });
+
+          ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            uploadContainer.addEventListener(eventName, e => e.preventDefault());
+          });
+
+          ['dragenter', 'dragover'].forEach(eventName => {
+            uploadContainer.addEventListener(eventName, () => uploadContainer.classList.add('dragover'));
+          });
+
+          ['dragleave', 'drop'].forEach(eventName => {
+            uploadContainer.addEventListener(eventName, () => uploadContainer.classList.remove('dragover'));
+          });
+
+          uploadContainer.addEventListener('drop', e => {
+            fileInput.files = e.dataTransfer.files;
+            const form = document.getElementById('fileUploadForm');
+            form.submit();
+          });
+        </script>
+<script>
+  function submitPhoto() {
+        const form = document.getElementById('fileUploadForm');
+        const cameraInput = document.getElementById('cameraInput');
+        const fileInput = document.getElementById('fileInput');
+
+        // 将拍摄的照片设置为表单的输入
+        fileInput.files = cameraInput.files;
+        form.submit();
+    }
+</script>
+
+</html>
+{% endblock %}

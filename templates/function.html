@@ -1,0 +1,262 @@
+{% extends "base.html" %}
+
+{% block page_content %}
+<html>
+<head>
+    <title>Title</title>
+</head>
+<body>
+  <div class="mdui-container">
+    <div class="mdui-panel" mdui-panel>
+      <div class="mdui-panel-item">
+        <div class="mdui-panel-item-header"><h2>金融功能-Fi</h2></div>
+        <div class="mdui-panel-item-body  mdui-row-xs-2 mdui-row-sm-2 mdui-row-md-4" >
+<!--          #趋势分析1-->
+          <div class="mdui-col">
+          <mdui-card clickable style="width: 220px;height: 124px" href="{{url_for('trend')}}">
+            <div class="mdui-card-media" >
+            <img   src="{{ url_for('static', filename='reference/桌面.jpg') }}"/>
+            <div class="mdui-card-media-covered ">
+              <div class="mdui-card-primary">
+                <div class="mdui-card-primary-title">趋势分析</div>
+                <div class="mdui-card-primary-subtitle">Trend Analysis</div>
+              </div>
+            </div>
+          </div>
+          </mdui-card>
+          </div>
+<!--          visualization分析-->
+          <div class="mdui-col">
+          <mdui-card clickable  style="width: 220px;height: 124px" href="{{url_for('visualization')}}">
+            <div class="mdui-card-media" >
+            <img   src="{{ url_for('static', filename='reference/卡片1.jpeg') }}"/>
+            <div class="mdui-card-media-covered ">
+              <div class="mdui-card-primary">
+                <div class="mdui-card-primary-title">可视化分析</div>
+                <div class="mdui-card-primary-subtitle">Visualization Analysis</div>
+              </div>
+            </div>
+          </div>
+          </mdui-card>
+          </div>
+<!--          NEWS-->
+           <div class="mdui-col">
+          <mdui-card clickable style="width: 220px;height: 124px" href="{{url_for('news')}}">
+            <div class="mdui-card-media" >
+            <img   src="{{ url_for('static', filename='reference/卡片-新闻4.jpeg') }}"/>
+            <div class="mdui-card-media-covered ">
+              <div class="mdui-card-primary">
+                <div class="mdui-card-primary-title">新闻资讯</div>
+                <div class="mdui-card-primary-subtitle">News Integration</div>
+              </div>
+            </div>
+          </div>
+          </mdui-card>
+           </div>
+<!--          information-->
+           <div class="mdui-col">
+          <mdui-card clickable  style="width: 220px;height: 124px" href="{{url_for('information')}}">
+            <div class="mdui-card-media" >
+            <img   src="{{ url_for('static', filename='reference/卡片-信息.jpeg') }}"/>
+            <div class="mdui-card-media-covered ">
+              <div class="mdui-card-primary">
+                <div class="mdui-card-primary-title">信息分享</div>
+                <div class="mdui-card-primary-subtitle">Information Share</div>
+              </div>
+            </div>
+          </div>
+          </mdui-card>
+        </div>
+<!--         股票指数的分析-->
+           <div class="mdui-col">
+          <mdui-card clickable  style="width: 220px;height: 124px" href="{{url_for('stockindex')}}">
+            <div class="mdui-card-media" >
+            <img   src="{{ url_for('static', filename='reference/卡片-指数.jpeg') }}"/>
+            <div class="mdui-card-media-covered ">
+              <div class="mdui-card-primary">
+                <div class="mdui-card-primary-title">指数分析</div>
+                <div class="mdui-card-primary-subtitle">Index Analysis</div>
+              </div>
+            </div>
+          </div>
+          </mdui-card>
+        </div>
+
+    </div>
+      </div>
+      <div class="mdui-panel-item mdui-panel-item-open">
+        <div class="mdui-panel-item-header"><h2>交互类-In</h2></div>
+        <div class="mdui-panel-item-body   mdui-row-xs-2 mdui-row-sm-2 mdui-row-md-4">
+          <!--          HR-->
+           <div class="mdui-col">
+          <mdui-card clickable style="width: 220px;height: 124px" href="{{url_for('hr')}}">
+            <div class="mdui-card-media" >
+            <img   src="{{ url_for('static', filename='reference/卡片-HR.jpeg') }}"/>
+            <div class="mdui-card-media-covered ">
+              <div class="mdui-card-primary">
+                <div class="mdui-card-primary-title">人事管理</div>
+                <div class="mdui-card-primary-subtitle">HR Management</div>
+              </div>
+            </div>
+          </div>
+          </mdui-card>
+           </div>
+            <!--          婚姻恋爱板块-->
+           <div class="mdui-col">
+          <mdui-card clickable style="width: 220px;height: 124px" href="{{url_for('love')}}">
+            <div class="mdui-card-media" >
+            <img   src="{{ url_for('static', filename='reference/卡片-恋爱.jpeg') }}"/>
+            <div class="mdui-card-media-covered ">
+              <div class="mdui-card-primary">
+                <div class="mdui-card-primary-title">恋爱管理</div>
+                <div class="mdui-card-primary-subtitle">Love Management</div>
+              </div>
+            </div>
+          </div>
+          </mdui-card>
+           </div>
+
+<!--          Note-->
+          <div class="mdui-col">
+          <mdui-card clickable style="width: 220px;height: 124px" href="{{url_for('note_show')}}">
+            <div class="mdui-card-media" >
+            <img   src="{{ url_for('static', filename='reference/卡片-笔记.jpeg') }}"/>
+            <div class="mdui-card-media-covered ">
+              <div class="mdui-card-primary">
+                <div class="mdui-card-primary-title">笔记分享</div>
+                <div class="mdui-card-primary-subtitle">Note Share</div>
+              </div>
+            </div>
+          </div>
+          </mdui-card>
+          </div>
+
+          <!--          随机点名-->
+          <div class="mdui-col">
+          <mdui-card clickable style="width: 220px;height: 124px" href="{{url_for('suiji')}}">
+            <div class="mdui-card-media" >
+            <img   src="{{ url_for('static', filename='reference/卡片-点名.jpeg') }}"/>
+            <div class="mdui-card-media-covered ">
+              <div class="mdui-card-primary">
+                <div class="mdui-card-primary-title">点名神器</div>
+                <div class="mdui-card-primary-subtitle">Random Tools</div>
+              </div>
+            </div>
+          </div>
+          </mdui-card>
+          </div>
+
+        </div>
+      </div>
+      <div class="mdui-panel-item mdui-panel-item-open">
+        <div class="mdui-panel-item-header"><h2>娱乐功能-En</h2></div>
+        <div class="mdui-panel-item-body  mdui-row-xs-2 mdui-row-sm-2 mdui-row-md-4">
+          <!--          #人脸识别-->
+           <div class="mdui-col">
+          <mdui-card clickable style="width: 200px;height: 100px" href="{{url_for('face')}}">
+            <div class="mdui-card-media" >
+            <img   src="{{ url_for('static', filename='reference/卡片-人脸识别.jpeg') }}"/>
+            <div class="mdui-card-media-covered ">
+              <div class="mdui-card-primary">
+                <div class="mdui-card-primary-title">人脸识别</div>
+                <div class="mdui-card-primary-subtitle">face recognition</div>
+              </div>
+            </div>
+          </div>
+          </mdui-card>
+           </div>
+          <!--          #人脸识别2-->
+           <div class="mdui-col">
+          <mdui-card clickable style="width: 200px;height: 100px" href="{{url_for('face2')}}">
+            <div class="mdui-card-media" >
+            <img   src="{{ url_for('static', filename='reference/卡片-人脸识别2.jpeg') }}"/>
+            <div class="mdui-card-media-covered ">
+              <div class="mdui-card-primary">
+                <div class="mdui-card-primary-title">人脸识别2</div>
+                <div class="mdui-card-primary-subtitle">face recognition2</div>
+              </div>
+            </div>
+          </div>
+          </mdui-card>
+           </div>
+          <!--          #聊天机器人-->
+           <div class="mdui-col">
+          <mdui-card clickable style="width: 200px;height: 100px" href="{{url_for('chat')}}">
+            <div class="mdui-card-media" >
+            <img   src="{{ url_for('static', filename='reference/卡片-聊天2.jpeg') }}"/>
+            <div class="mdui-card-media-covered ">
+              <div class="mdui-card-primary">
+                <div class="mdui-card-primary-title">智能聊天</div>
+                <div class="mdui-card-primary-subtitle">Free Chat</div>
+              </div>
+            </div>
+          </div>
+          </mdui-card>
+           </div>
+            <!--          #音乐播放器-->
+           <div class="mdui-col">
+          <mdui-card clickable style="width: 200px;height: 100px" href="{{url_for('audio')}}">
+            <div class="mdui-card-media" >
+            <img   src="{{ url_for('static', filename='reference/卡片-音乐.jpeg') }}"/>
+            <div class="mdui-card-media-covered ">
+              <div class="mdui-card-primary">
+                <div class="mdui-card-primary-title">音乐播放</div>
+                <div class="mdui-card-primary-subtitle">Musik Spilen</div>
+              </div>
+            </div>
+          </div>
+          </mdui-card>
+           </div>
+            <!--          #图片观赏-->
+           <div class="mdui-col ">
+          <mdui-card clickable style="width: 200px;height: 100px" href="{{url_for('photo')}}" >
+            <div class="mdui-card-media" >
+            <img   src="{{ url_for('static', filename='reference/卡片-图片1.jpeg') }}"/>
+            <div class="mdui-card-media-covered ">
+              <div class="mdui-card-primary">
+                <div class="mdui-card-primary-title">图片赏析</div>
+                <div class="mdui-card-primary-subtitle">Foto Genissen</div>
+              </div>
+            </div>
+          </div>
+          </mdui-card>
+          </div>
+ <!--          #美颜设计-->
+           <div class="mdui-col ">
+          <mdui-card clickable style="width: 200px;height: 100px" href="{{url_for('easthetic')}}" >
+            <div class="mdui-card-media" >
+            <img   src="{{ url_for('static', filename='reference/卡片-美颜.jpeg') }}"/>
+            <div class="mdui-card-media-covered ">
+              <div class="mdui-card-primary">
+                <div class="mdui-card-primary-title">美颜设计</div>
+                <div class="mdui-card-primary-subtitle">Easthetic Design</div>
+              </div>
+            </div>
+          </div>
+          </mdui-card>
+          </div>
+
+            <!--          #山海经-->
+           <div class="mdui-col ">
+          <mdui-card clickable style="width: 200px;height: 100px" href="{{url_for('shanhai')}}" >
+            <div class="mdui-card-media" >
+            <img   src="{{ url_for('static', filename='reference/卡片-山海经.jpeg') }}"/>
+            <div class="mdui-card-media-covered ">
+              <div class="mdui-card-primary">
+                <div class="mdui-card-primary-title">山海经</div>
+                <div class="mdui-card-primary-subtitle">Shanhai Story</div>
+              </div>
+            </div>
+          </div>
+          </mdui-card>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+</body>
+</html>
+
+{% endblock %}

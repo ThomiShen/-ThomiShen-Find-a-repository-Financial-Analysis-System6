@@ -1,0 +1,199 @@
+  /* 黑白模式 */
+.mdui-theme-dark,
+.mdui-theme-dark body {
+  background-color: #121212;
+  margin: 0;
+}
+/* 聊天消息的暗色模式样式 */
+.mdui-theme-dark .user-message,
+.mdui-theme-dark .bot-message {
+    background-color: rgba(255, 255, 255, 0.1); /* 暗色模式下的聊天消息背景颜色 */
+    color: #ffffff; /* 暗色模式下的聊天消息文本颜色 */
+}
+
+/* 聊天输入区域的暗色模式样式 */
+.mdui-theme-dark .mdui-textfield-input {
+    background-color: #1e1e1e; /* 暗色模式下的输入框背景颜色 */
+    color: #ffffff; /* 暗色模式下的输入框文本颜色 */
+}
+
+/* 发送按钮的暗色模式样式 */
+.mdui-theme-dark #send-btn {
+    background-color: #272727; /* 暗色模式下的按钮背景颜色 */
+    color: #ffffff; /* 暗色模式下的按钮文本颜色 */
+}
+
+.mdui-theme-dark #chat-box {
+    background-color: #1A1A1A; /* 暗色模式下的背景颜色 */
+    color: #E0E0E0; /* 暗色模式下的文本颜色 */
+}
+
+/* 暗色模式全局样式 */
+.mdui-theme-dark {
+    background-color: #121212;
+    color: #fff;
+}
+
+/* 暗色模式聊天气泡样式 */
+.mdui-theme-dark .user-message,
+.mdui-theme-dark .bot-message {
+    background-color: #333; /* 暗色背景 */
+    color: #fff; /* 白色文本 */
+}
+
+/* 暗色模式输入区域样式 */
+.mdui-theme-dark .mdui-textfield-input {
+    background-color: #222; /* 输入框暗色背景 */
+    color: #fff; /* 输入框白色文本 */
+}
+
+/* 暗色模式按钮样式 */
+.mdui-theme-dark .mdui-btn {
+    background-color: #444; /* 按钮暗色背景 */
+    color: #fff; /* 按钮白色文本 */
+}
+
+/* 暗色模式聊天区域样式 */
+.mdui-theme-dark #chat-box {
+    background-color: #151515; /* 聊天区暗色背景 */
+    border-color: #333; /* 聊天区边框暗色 */
+}
+
+.mdui-theme-dark .mdui-card-content {
+    color: #ffffff;
+}
+
+.mdui-theme-dark .mdui-card-header {
+    color: #ffffff;
+    background-color: #222222; /* 聊天区暗色背景 */
+}
+.mdui-theme-dark .mdui-card {
+    background-color: #000000; /* 聊天区暗色背景 */
+}
+/* 针对trend的table设置*/
+.mdui-theme-dark .mdui-table {
+    background-color: #333; /* 暗色模式下的表格背景 */
+    color: #fff; /* 暗色模式下的文本颜色 */
+}
+.mdui-theme-dark .mdui-table th,
+.mdui-theme-dark .mdui-table td {
+    border-color: #444; /* 暗色模式下的表格线颜色 */
+    color: #fff; /* 暗色模式下的文本颜色 */
+}
+.mdui-theme-dark .mdui-card-header,
+.mdui-theme-dark .mdui-card-content {
+    background-color: #222; /* 暗色模式下的卡片背景 */
+    color: #fff; /* 暗色模式下的卡片文本颜色 */
+}
+/* 暗色模式下链接的样式 */
+.mdui-theme-dark a {
+    color: #bb86fc; /* 暗色模式下的链接颜色 */
+}
+
+/* 暗色模式卡片样式 */
+.mdui-theme-dark .mdui-card {
+    background-color: #1a1a1a; /* 暗色卡片背景 */
+    color: #e0e0e0; /* 亮色卡片文本 */
+}
+
+/* index的优化--------------------------------index的优化--------------------------------*/
+/* 暗色模式下标题的样式 */
+.mdui-theme-dark .mdui-card-header-title,
+.mdui-theme-dark .mdui-card-header-subtitle {
+    color: #fff; /* 暗色模式下标题和副标题的文本颜色 */
+}
+
+/* 暗色模式样式 */
+.mdui-theme-dark .textfield-dark-theme {
+    background: #333; /* 暗色背景 */
+    color: #ddd; /* 淡色文字 */
+    border-bottom: 1px solid #444; /* 暗色边框 */
+}
+
+/* 默认的亮色模式样式 */
+.mdui-chip-title {
+    color: #000; /* 默认黑色文字 */
+}
+
+/* 暗色模式样式 */
+.mdui-theme-dark .mdui-chip-title {
+    color: #000; /* 暗模式下的淡色文字 */
+}
+
+/* 暗色模式样式 */
+.mdui-theme-dark .textfield-dark-theme {
+    background: #333; /* 暗色背景 */
+    color: #ddd; /* 淡色文字 */
+    border-bottom: 1px solid #444; /* 暗色边框 */
+}
+
+/* 暗色模式下风车容器的样式 */
+.mdui-theme-dark .windmill-container {
+  background-color: ##222222; /* 暗模式背景色 */
+  color: #fff; /* 文本颜色设置为白色 */
+}
+
+/* 用于风车图标的样式，确保它在暗模式下也可见 */
+.mdui-theme-dark .fa-ellipsis-vertical,
+.mdui-theme-dark .fa-fan {
+  color: #fff; /* 图标颜色设置为白色 */
+}
+
+/* index的优化--------------------------------index的优化--------------------------------*/
+/* suiji的优化--------------------------------suiji的优化--------------------------------*/
+
+/* 暗色模式样式 */
+.mdui-theme-dark .mdui-panel-item {
+    color: #000; /* 暗模式下的淡色文字 */
+    background: #333; /* 暗色背景 */
+}
+.mdui-theme-dark .mdui-panel-item .mdui-typo-title a{
+    color: #000; /* 暗模式下的淡色文字 */
+}
+
+.mdui-theme-dark .mdui-textfield-input,
+.mdui-theme-dark .mdui-typo-title,
+.mdui-theme-dark .mdui-textfield-label {
+  color: #fff; /* or any light color that is visible on dark backgrounds */
+}
+.mdui-theme-dark .mdui-textfield-input::placeholder {
+  color: rgba(255, 255, 255, 0.7); /* Light color for placeholder text */
+}
+/* suiji的优化--------------------------------suiji的优化--------------------------------*/
+/* Finance 右侧的按钮的优化-------------------------------Finance 右侧的按钮的优化---------------------------*/
+/* For floating action buttons */
+/* 暗色模式下顶部应用栏的样式 */
+
+/* 搜索栏的优化----------------搜索栏的优化---------------搜索栏的优化-----------------------------------*/
+
+.mdui-theme-dark #searchCard {
+    background-color: rgba(255, 255, 255, 0.1); /* Adjust transparency for dark mode */
+    backdrop-filter: blur(10px); /* Ensure the blur effect is present */
+    -webkit-backdrop-filter: blur(10px); /* For Safari */
+    border: 1px solid rgba(255, 255, 255, 0.3); /* Adjust the border for dark mode */
+    color: #fff; /* Text color for dark mode */
+}
+
+.mdui-theme-dark #searchCard .mdui-textfield-input {
+    color: #eee; /* Text color for input in dark mode */
+}
+
+.mdui-theme-dark #searchCard .mdui-icon {
+    color: #fff; /* Icon color for search icon in dark mode */
+}
+
+/* If you have a placeholder, style it as well */
+.mdui-theme-dark #searchCard .mdui-textfield-input::placeholder {
+    color: rgba(255, 255, 255, 0.5); /* Placeholder color in dark mode */
+}
+
+/* For the search button inside the search card */
+.mdui-theme-dark #searchCard #submitSearch {
+    background-color: #555; /* Button background color in dark mode */
+    color: #fff; /* Button icon color in dark mode */
+}
+
+/* If the search button changes color on hover, add this too */
+.mdui-theme-dark #searchCard #submitSearch:hover {
+    background-color: #555; /* Slightly lighter color on hover for contrast */
+}

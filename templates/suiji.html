@@ -1,0 +1,137 @@
+{% extends "base.html" %}
+
+{% block page_content %}
+<head>
+    <style>
+.upload-container {
+      border: 2px dashed #ccc;
+      border-radius: 5px;
+      padding: 20px;
+      text-align: center;
+      cursor: pointer;
+    }
+    .upload-container.dragover {
+      border-color: #000;
+    }
+    .sub-button1{
+    text-align: center;
+    }
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>随机点名数字</title>
+</head>
+<body>
+<div class="mdui-container">
+    <div class="mdui-panel" mdui-panel>
+  <div class="mdui-panel-item mdui-panel-item-open">
+      <div class="mdui-panel-item-header"><h2 class="mdui-text-color-cyan-400">数字点名</h2></div>
+        <div class="mdui-panel-item-body mdui-row-md-12 mdui-row-sm-12">
+    <div class="mdui-row">
+        <div class="mdui-col-xs-12 mdui-col-md-6">
+            <!-- 表单内容 -->
+            <form action="{{ url_for('suiji') }}" method="post">
+                <div class="mdui-textfield mdui-textfield-floating-label">
+                    <label class="mdui-textfield-label">请输入点名最大数字</label>
+                    <input class="mdui-textfield-input" type="number" name="maxNumber" required/>
+                </div>
+                <button type="submit" class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme">生成随机数</button>
+                {% if random_number %}
+                 <div></div>
+                    <div class="mdui-typo-title mdui-m-t-3">生成的数字为：<b>{{ random_number }}</b></div>
+                {% else %}
+                    <div class="mdui-typo-title mdui-m-t-3">请在输入一下！</div>
+                {% endif %}
+            </form>
+        </div>
+
+
+     <div clickable class="mdui-card-media mdui-col-xs-12 mdui-col-md-6" >
+            <img src="{{ url_for('static', filename='reference/表情包3.jpeg') }}" class="mdui-hoverable mdui-shadow-12  mdui-img-fluid" weigh=300 height=100 alt="卡片图片">
+            </div>
+    </div>
+</div>
+    </div>
+  <div class="mdui-panel-item mdui-panel-item-open">
+      <div class="mdui-panel-item-header"><h2 class="mdui-text-color-pink-400">名字点名</h2></div>
+        <div class="mdui-panel-item-body mdui-row-md-12 mdui-row-sm-12">
+    <div class="mdui-row">
+        <div class="mdui-col-xs-12 mdui-col-md-6">
+            <!-- 表单内容 -->
+            <form action="{{ url_for('suiji') }}" method="post">
+                <div class="mdui-textfield mdui-textfield-floating-label">
+                    <label class="mdui-textfield-label">请复制学生姓名信息（每个名字之间请空格，谢谢！）</label>
+                    <textarea id="textData" class="mdui-textfield-input" rows="4"  name="StudentName" required></textarea>
+                </div>
+                <button type="submit" class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme">提交</button>
+                {% if random_name %}
+                 <div></div>
+                    <div class="mdui-typo-title mdui-m-t-3">幸运的（倒霉儿）为：<b>{{ random_name }}</b></div>
+                {% else %}
+                    <div class="mdui-typo-title mdui-m-t-3">！！！！！！！</div>
+                {% endif %}
+            </form>
+        </div>
+            <!-- 图片内容 -->
+            <div clickable class="mdui-card-media mdui-col-xs-12 mdui-col-md-6" >
+            <img src="{{ url_for('static', filename='reference/表情包4.jpeg') }}" class="mdui-hoverable mdui-shadow-12  mdui-img-fluid" weigh=300 height=100 alt="卡片图片">
+            </div>
+    </div>
+</div>
+    </div>
+  <div class="mdui-panel-item mdui-panel-item-open">
+    <div class="mdui-panel-item-header"><h2 class="mdui-text-color-green-400">Excel点名</h2></div>
+    <div class="mdui-panel-item-body mdui-row-md-12 mdui-row-sm-12">
+        <div class="mdui-row">
+            <div class="mdui-col-xs-12">
+                <div id="drop-area" class="mdui-card mdui-hoverable mdui-shadow-12">
+        <div class="upload-container" id="uploadContainer">
+                       拖放excel到这里，或者 <strong>点击选择本地文件</strong>
+          <form id="fileUploadForm" action="/suiji" method="post" enctype="multipart/form-data" style="display: none;">
+            <input type="file" name="file" accept=".xls, .xlsx" id="fileInput">
+          </form>
+        </div>
+                </div>
+            </div>
+        </div>
+         <div class="mdui-typo-title mdui-m-t-3">幸运儿（┮﹏┭）是这位：<b>{{random_name2}}</b></div>
+    </div>
+</div>
+
+
+
+
+  </div>
+</div>
+  </div>
+</div>
+<script>
+         const uploadContainer = document.getElementById('uploadContainer');
+          const fileInput = document.getElementById('fileInput');
+          uploadContainer.addEventListener('click', () => fileInput.click());
+          fileInput.addEventListener('change', () => {
+            const form = document.getElementById('fileUploadForm');
+            form.submit();
+          });
+
+          ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            uploadContainer.addEventListener(eventName, e => e.preventDefault());
+          });
+
+          ['dragenter', 'dragover'].forEach(eventName => {
+            uploadContainer.addEventListener(eventName, () => uploadContainer.classList.add('dragover'));
+          });
+
+          ['dragleave', 'drop'].forEach(eventName => {
+            uploadContainer.addEventListener(eventName, () => uploadContainer.classList.remove('dragover'));
+          });
+
+          uploadContainer.addEventListener('drop', e => {
+            fileInput.files = e.dataTransfer.files;
+            const form = document.getElementById('fileUploadForm');
+            form.submit();
+          });
+        </script>
+</body>
+</html>
+{% endblock %}

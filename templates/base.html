@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html class="mdui-theme-dark">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Finance Analysis System</title>
+    <link rel="stylesheet" href="https://unpkg.com/mdui@2.0.1/mdui.css">
+     <script src="https://unpkg.com/mdui@2.0.1/mdui.global.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/mdui@1.0.2/dist/css/mdui.min.css" />
+    <script src="https://unpkg.com/mdui@1.0.2/dist/js/mdui.min.js"></script>
+<!--整个网站都能够响应黑白模式（暗色模式）-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='CSS/dark_mode.css') }}">
+    <style>
+/*平滑地过渡主题之间的切换，以减少视觉上的割裂感*/
+/* 在 body 或者 html 元素上添加 transition 属性 */
+html {
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* 应用于所有可能变化的属性 */
+*, *::before, *::after {
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s, fill 0.3s;
+}
+
+
+
+/* 增加侧边栏图标和文字之间的间距 */
+.mdui-list-item .mdui-icon {
+    margin-right: 16px; /* 或者你需要的任何值 */
+}
+
+.mdui-list-item-content {
+    padding-left: 16px; /* 或者你需要的任何值 */
+}
+
+
+.mdui-theme-dark .mdui-list-item .mdui-list-item-content {
+  color: #fff !important;
+}
+
+.mdui-theme-dark  .mdui-collapse-item  .mdui-collapse-item-body  .mdui-list-item {
+ color: #fff !important;
+}
+.mdui-theme-dark .mdui-collapse-item-body .mdui-list-item .mdui-list-item-content {
+  color: #fff !important;
+}
+<!--网页的页脚-->
+.mdui-theme-dark .mdui-card-content,
+.mdui-theme-dark .mdui-card-content a,
+.mdui-theme-dark .mdui-card-content i {
+  color: #fff; /* 将文本颜色设置为白色 */
+}
+/* 暗色模式下的Thomi的信息 */
+.mdui-theme-dark .mdui-typo,
+.mdui-theme-dark .mdui-typo div,
+.mdui-theme-dark .mdui-typo a {
+  color: #fff !important; /* 强制文本颜色为白色 */
+}
+
+/* 暗色模式下的版权和其他信息文本颜色 */
+.mdui-theme-dark .mdui-col.mdui-text-center,
+.mdui-theme-dark .mdui-col.mdui-text-center a {
+  color: #fff !important;
+}
+
+.mdui-theme-dark .mdui-card-content {
+  background-color: #211f26; /* 将背景颜色设置为黑色 */
+}
+
+<!--/* example-layout-main根据需要添加其他样式，比如背景颜色等 */-->
+<!--.mdui-theme-dark .example-layout-main,-->
+<!--.mdui-theme-dark .example-layout-main .mdui-card-primary-title,-->
+<!--.mdui-theme-dark .example-layout-main a {-->
+<!--  color: #fff; /* 这会将文本颜色设置为白色 */-->
+<!--  /* 根据需要添加其他样式，比如背景颜色等 */-->
+<!--}-->
+
+
+
+
+
+#searchCard {
+    width: 100%; /* 使其与navbar的宽度相同 */
+    backdrop-filter: blur(10px); /* 毛玻璃效果 */
+<!--    background-color: rgba(255, 255, 255, 0.2); /* 半透明的背景 */-->
+    border: 1px solid rgba(255, 255, 255, 0.3); /* 浅色的边框 */
+    border-radius: 25px; /* 圆角 */
+    padding: 10px 20px; /* 内部填充 */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); /* 轻微的阴影 */
+    transition: all 0.3s; /* 平滑的过渡效果 */
+    position: absolute; /* 使用绝对定位 */
+    top: 60px; /* 将其放在navbar下方 */
+    left: 0; /* 使其与容器左侧对齐 */
+    z-index: 1000; /* 确保它在其他内容之上 */
+     background-color: rgba(255, 255, 255, 0.7); /* 白色背景，70% 不透明度 */
+
+}
+#searchCard:hover {
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.1); /* 悬停时的阴影效果 */
+}
+
+
+    </style>
+</head>
+<body >
+<div class="example-order1">
+ <mdui-bottom-app-bar style="position: relative;">
+  <mdui-button-icon icon="menu" class="open3" value="item-2"></mdui-button-icon>
+  <mdui-button-icon icon="search" id="searchButton"></mdui-button-icon>
+  <mdui-button-icon icon="mic"></mdui-button-icon>
+  <mdui-button-icon href="{{url_for('photo')}}" icon="image"></mdui-button-icon>
+   <mdui-button-icon href="{{url_for('audio')}}" icon="play_circle_outline"></mdui-button-icon>
+     <mdui-button-icon  icon="language" id="languageToggle"></mdui-button-icon>
+      <mdui-button-icon  icon="brightness_6" id="themeToggle"></mdui-button-icon>
+  <div style="flex-grow: 1"></div>
+  <mdui-fab icon="add"></mdui-fab>
+ <div id="searchCard" class="mdui-card" style="display:none;">
+    <div class="mdui-card-content">
+        <div class="mdui-textfield">
+            <input class="mdui-textfield-input" type="text" id="searchInput" placeholder="请输入股票代码或者名称"/>
+        </div>
+         <a id="submitSearch" class="mdui-btn mdui-btn-icon mdui-ripple mdui-hidden-xs-down"><i class="mdui-icon material-icons">search</i></a>
+        </div>
+</div>
+</mdui-bottom-app-bar>
+
+<mdui-layout class="example-order">
+<!-- Navbar -->
+<div class="example-placement" >
+ <mdui-navigation-bar value="item-1"
+    scroll-behavior="hide">
+  <mdui-navigation-bar-item icon="home" href="{{ url_for('index') }}" value="item-1">Home</mdui-navigation-bar-item>
+  <mdui-navigation-bar-item icon="present_to_all"  href="{{ url_for('function') }}" value="item-2">Funktion</mdui-navigation-bar-item>
+  <mdui-navigation-bar-item icon="book"  href="{{ url_for('news') }}"value="item-3">News</mdui-navigation-bar-item>
+  <mdui-navigation-bar-item icon="info" href="{{ url_for('about') }}" value="item-3">Info</mdui-navigation-bar-item>
+</mdui-navigation-bar>
+
+<mdui-top-app-bar >
+
+<mdui-top-app-bar-title>Finance Analysis System</mdui-top-app-bar-title>
+  <div style="flex-grow: 1"></div>
+<mdui-dialog close-on-overlay-click class="example-dialog">
+希望看到了可以推荐给其他人哦！爱你啊！！！(✪ω✪)
+    <div class="mdui-card-media">
+                        <img src="{{ url_for('static', filename='reference/蔡徐坤.jpeg') }}" alt="About Us Banner">
+                        <div class="mdui-card-media-covered">
+                            <div class="mdui-card-primary">
+                                <div class="mdui-card-primary-title">么么哒😘</div>
+                            </div>
+                        </div>
+   </div>
+</mdui-dialog>
+<mdui-button-icon  icon="share"></mdui-button-icon>
+
+
+<script>
+  const dialog = document.querySelector(".example-dialog");
+  const openButton = dialog.nextElementSibling;
+  const closeButton = dialog.querySelector("a");
+  openButton.addEventListener("click", () => dialog.open = true);
+  closeButton.addEventListener("click", () => dialog.open = false);
+</script>
+
+
+<mdui-button-icon  mdui-dialog="{target: '#exampleDialog'}" icon="info_outline"></mdui-button-icon>
+  <div class="mdui-dialog" id="exampleDialog">
+     <div class="mdui-dialog-title">欢迎访问金融管理信息系统</div>
+      <div class="mdui-dialog-content">这是一个可以查询股票致富代码分析、股票可视化分析、颜值分析、听歌、看图片、写简历、写文章、人机对话、查询金融信息的综合平台,接下来可能会进行开发N/P情感分析预测、Transformer股价预测模型分析/相亲专栏等功能！本身作为老师，断断续续写这个小程序，一开始是女同事说测颜值，然后另外有男同事说炒股票，便开始基于python_Flask和JS代码编写发展到现在。如今版本为5.13version，计划未来打包为安卓小软件！</div>
+       <div class="mdui-dialog-actions">
+        <button class="mdui-btn mdui-ripple" mdui-dialog-close>感谢关注！</button>
+      </div>
+    </div>
+</mdui-top-app-bar>
+
+
+<!-- Drawer -->
+
+<mdui-navigation-drawer id="main-drawer" placement="left" modal close-on-esc close-on-overlay-click contained>
+
+    <ul class="mdui-list mdui-collapse">
+        <li class="mdui-list-item mdui-ripple">
+            <mdui-button-icon href="{{url_for('index')}}" icon="airplay" ></mdui-button-icon>
+            <a href="{{url_for('index')}}" class="mdui-list-item-content">Home</a>
+        </li>
+
+        <!----   --   --   --   --   --       --  --     --    #笔记功能--   --   --   --   --   --   --   --   --   -->
+        <li class="mdui-collapse-item mdui-ripple">
+            <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
+                 <mdui-button-icon  icon="event_note" ></mdui-button-icon>
+                <div class="mdui-list-item-content">Notes</div>
+                <mdui-button-icon  icon="keyboard_arrow_down"  class="mdui-collapse-item-arrow"></mdui-button-icon>
+            </div>
+            <div class="mdui-collapse-item-body mdui-list">
+                <a href="{{url_for('login')}}" class="mdui-list-item mdui-ripple">Login</a>
+                 {% if session.logged_in %}
+                <a href="{{url_for('note')}}" class="mdui-list-item mdui-ripple">Note</a>
+                 {% endif %}
+                <a href="{{url_for('note_show')}}" class="mdui-list-item mdui-ripple">Show</a>
+            </div>
+        </li>
+
+        <!-- ######## ################音乐播放 ######## ######## ######## ######## ########-->
+          <li class="mdui-list-item mdui-ripple"  >
+            <mdui-button-icon href="{{url_for('audio')}}" icon="play_circle_filled" ></mdui-button-icon>
+            <a  href="{{url_for('audio')}}" class="mdui-list-item-content">Audio</a>
+         </li>
+        <!-- 音乐下拉菜单部分 -->
+        <li class="mdui-collapse-item mdui-ripple">
+            <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
+                  <mdui-button-icon  icon="headset" ></mdui-button-icon>
+                <div class="mdui-list-item-content">Musik</div>
+                <mdui-button-icon  icon="keyboard_arrow_down"  class="mdui-collapse-item-arrow"></mdui-button-icon>
+            </div>
+            <!-- 背景音乐播放器 -->
+         <audio id="backgroundMusic" controls style="display:none;">
+    <source id="musicSource" type="audio/mp3">
+          </audio>
+            <div class="mdui-collapse-item-body mdui-list">
+                <a  class="mdui-list-item mdui-ripple" onclick="playMusic('{{ url_for('static', filename='audio/光的方向.mp3') }}')">光的方向</a>
+                <a  class="mdui-list-item mdui-ripple" onclick="playMusic('{{ url_for('static', filename='audio/天后.mp3') }}')">天后</a>
+                <a  class="mdui-list-item mdui-ripple" onclick="playMusic('{{ url_for('static', filename='audio/消失的她.mp3') }}')">消失的她</a>
+            </div>
+     </li>
+          <!-- 变色操作设计设计 -->
+
+       <li class="mdui-list-item mdui-ripple">
+         <mdui-button-icon  icon="all_inclusive" id="themeToggle1"></mdui-button-icon>
+            <a  class="mdui-list-item-content" id="themeToggle2">Change Color</a>
+        </li>
+         <!-- 可视化设计 -->
+        <li class="mdui-list-item mdui-ripple"  >
+             <mdui-button-icon  href="{{url_for('visualization')}}"  icon="brightness_low" ></mdui-button-icon>
+            <a  href="{{url_for('visualization')}}" class="mdui-list-item-content">Visualization</a>
+        </li>
+
+        <!--        ########Trend-->
+          <li class="mdui-list-item mdui-ripple"  >
+               <mdui-button-icon  href="{{url_for('trend')}}"  icon="call_made" ></mdui-button-icon>
+            <a  href="{{url_for('trend')}}" class="mdui-list-item-content">Trend</a>
+        </li>
+        <!--        ########Index-->
+          <li class="mdui-list-item mdui-ripple"  >
+              <mdui-button-icon  href="{{url_for('stockindex')}}"  icon="exposure" ></mdui-button-icon>
+            <a  href="{{url_for('stockindex')}}" class="mdui-list-item-content">Index</a>
+        </li>
+  <!--        ########Calculate-->
+            <li class="mdui-list-item mdui-ripple"  >
+           <mdui-button-icon  href="{{url_for('suiji')}}"  icon="camera_front" ></mdui-button-icon>
+            <a  href="{{url_for('suiji')}}" class="mdui-list-item-content">Calculate</a>
+        </li>
+       <!--        ########Chat-->
+          <li class="mdui-list-item mdui-ripple"  >
+              <mdui-button-icon  href="{{url_for('chat')}}"  icon="chat_bubble" ></mdui-button-icon>
+            <a  href="{{url_for('chat')}}" class="mdui-list-item-content">Chat</a>
+        </li>
+
+
+               <!--        ########人脸识别-->
+          <li class="mdui-list-item mdui-ripple"  >
+                <mdui-button-icon  href="{{url_for('face')}}"  icon="tag_faces" ></mdui-button-icon>
+            <a  href="{{url_for('face')}}" class="mdui-list-item-content">Face Recognition</a>
+         </li>
+ <!--        ########人脸识别2-->
+          <li class="mdui-list-item mdui-ripple"  >
+               <mdui-button-icon  href="{{url_for('face2')}}"  icon="face" ></mdui-button-icon>
+            <a  href="{{url_for('face2')}}" class="mdui-list-item-content">Face Recognition2</a>
+         </li>
+                    <!--        ########HR信息系统-->
+          <li class="mdui-list-item mdui-ripple"  >
+              <mdui-button-icon  href="{{url_for('hr')}}"  icon="account_box" ></mdui-button-icon>
+            <a  href="{{url_for('hr')}}" class="mdui-list-item-content">HR System</a>
+         </li>
+        <!--        ########Love-->
+          <li class="mdui-list-item mdui-ripple"  >
+                <mdui-button-icon  href="{{url_for('love')}}"  icon="wc" ></mdui-button-icon>
+            <a  href="{{url_for('love')}}" class="mdui-list-item-content">Match System</a>
+         </li>
+
+
+                <!--        ########Shanhaijing-->
+          <li class="mdui-list-item mdui-ripple"  >
+                <mdui-button-icon  href="{{url_for('shanhai')}}"  icon="pets" ></mdui-button-icon>
+            <a  href="{{url_for('shanhai')}}" class="mdui-list-item-content">Shanhai</a>
+         </li>
+
+
+        <!--        ########NEWS-->
+          <li class="mdui-list-item mdui-ripple"  >
+                <mdui-button-icon  href="{{url_for('news')}}"  icon="assistant" ></mdui-button-icon>
+            <a  href="{{url_for('news')}}"  class="mdui-list-item-content">News</a>
+        </li>
+
+<!--        ########Information-->
+          <li class="mdui-list-item mdui-ripple"  >
+                <mdui-button-icon  href="{{url_for('information')}}"  icon="cloud_circle" ></mdui-button-icon>
+            <a  href="{{url_for('information')}}" class="mdui-list-item-content">Information</a>
+        </li>
+
+        <li class="mdui-list-item mdui-ripple">
+                   <mdui-button-icon  href="{{url_for('about')}}"  icon="settings" ></mdui-button-icon>
+            <a href="{{url_for('about')}}" class="mdui-list-item-content">about us</a>
+        </li>
+    </ul>
+</mdui-navigation-drawer>
+
+</div>
+
+
+<mdui-layout-main class="example-layout-main" >
+
+      <!-- 在这里展示 flash 消息 -->
+    <!-- 用于显示 flash 消息的容器 -->
+   {%  with messages = get_flashed_messages() %}
+            {% if messages %}
+
+    <div class="mdui-card-media" id="error-dialog" style="display:block;" onclick="dismissErrorDialog()">
+              <img src="{{ url_for('static', filename='reference/表情包.png') }}" >
+     <div class="mdui-card-media-covered">
+            <div class="mdui-card-primary">
+            <div class="mdui-card-primary-title">输入错误啊！！！再试试！！！</div>
+           </div>
+    </div>
+   </div>
+            {% endif %}
+        {% endwith %}
+<script>
+    function dismissErrorDialog() {
+        var dialog = document.getElementById('error-dialog');
+        if (dialog) {
+            dialog.style.display = 'none';
+        }
+    }
+</script>
+    {% block page_content %}{% endblock %}
+</mdui-layout-main>
+
+ </mdui-layout>
+ <div class="mdui-card-content mdui-shadow-0 mdui-p-a-5">
+    <div class="mdui-container">
+        <div class="mdui-row-sm-3 k-footer-sns">
+            <div class="mdui-col">
+                <div class="mdui-row">
+                    <div class="mdui-col-xs-4 mdui-col-sm-3 mdui-col-md-2 ">
+                        <a href="https://www.zust.edu.cn/">
+                                <i class="mdui-icon material-icons">school</i>
+                        </a>
+                    </div>
+                    <div class="mdui-col-xs-4 mdui-col-sm-3 mdui-col-md-2 ">
+                        <a href="https://mail.qq.com">
+                            <i class="mdui-icon material-icons">contact_mail</i>
+                        </a> </div>
+                    <div class="mdui-col-xs-4 mdui-col-sm-3 mdui-col-md-2 ">
+                        <a href="https://www.bi-analysis.com.cn/">
+            <i class="mdui-icon material-icons">polymer</i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="mdui-col mdui-text-center" style="line-height:48px">China/Zhejiang Copyright ©<script>var fd=new Date;document.write("&nbsp;"+fd.getFullYear()+"&nbsp;")</script>&nbsp;&nbsp; ThomiSHEN </div> <div class="mdui-col mdui-text-center mdui-typo">
+            <div>Powered by <a href="https://github.com/ThomiShen/">Thomi</a></div> <div>Theme： <a href="https://console.cloud.tencent.com/beian">浙ICP备2023039084号</a></div> </div> </div> </div> </div>
+<!--主题颜色变化-->
+  <script>
+document.addEventListener('DOMContentLoaded', (event) => {
+  // 检查localStorage中保存的主题，并应用它
+  const currentTheme = localStorage.getItem('theme');
+  if (currentTheme === 'dark') {
+    document.documentElement.classList.add('mdui-theme-dark');
+  } else {
+    document.documentElement.classList.remove('mdui-theme-dark');
+  }
+});
+
+document.getElementById('themeToggle').addEventListener('click', function() {
+  const htmlClassList = document.documentElement.classList;
+  if (htmlClassList.contains('mdui-theme-dark')) {
+    htmlClassList.remove('mdui-theme-dark');
+    localStorage.setItem('theme', 'light');
+  } else {
+    htmlClassList.add('mdui-theme-dark');
+    localStorage.setItem('theme', 'dark');
+  }
+});
+document.getElementById('themeToggle1').addEventListener('click', function() {
+  const htmlClassList = document.documentElement.classList;
+  if (htmlClassList.contains('mdui-theme-dark')) {
+    htmlClassList.remove('mdui-theme-dark');
+    localStorage.setItem('theme', 'light');
+  } else {
+    htmlClassList.add('mdui-theme-dark');
+    localStorage.setItem('theme', 'dark');
+  }
+});
+</script>
+<!-- &lt;!&ndash;主题颜色变化1&ndash;&gt;-->
+<!--  <script>-->
+<!--document.getElementById('themeToggle1').addEventListener('click', function() {-->
+<!--    const htmlClass = document.documentElement.classList;-->
+<!--    if (htmlClass.contains('mdui-theme-dark')) {-->
+<!--        htmlClass.remove('mdui-theme-dark');-->
+<!--        htmlClass.add('mdui-theme-light');-->
+<!--    } else {-->
+<!--        htmlClass.remove('mdui-theme-light');-->
+<!--        htmlClass.add('mdui-theme-dark');-->
+<!--    }-->
+<!--});-->
+<!--</script>-->
+<!-- &lt;!&ndash;主题颜色变化2&ndash;&gt;-->
+<!--  <script>-->
+<!--document.getElementById('themeToggle2').addEventListener('click', function() {-->
+<!--    const htmlClass = document.documentElement.classList;-->
+<!--    if (htmlClass.contains('mdui-theme-dark')) {-->
+<!--        htmlClass.remove('mdui-theme-dark');-->
+<!--        htmlClass.add('mdui-theme-light');-->
+<!--    } else {-->
+<!--        htmlClass.remove('mdui-theme-light');-->
+<!--        htmlClass.add('mdui-theme-dark');-->
+<!--    }-->
+<!--});-->
+<!--</script>-->
+
+<script>
+    // 播放音乐的函数
+    function playMusic(src) {
+        var audioPlayer = document.getElementById('backgroundMusic');
+        audioPlayer.src = src;
+        audioPlayer.play();
+    }
+
+</script>
+
+<script>
+//为了确保它被初始化，可以在 JavaScript 中明确地这样做new mdui.Collapse('.mdui-collapse');
+new mdui.Collapse('.mdui-collapse');
+
+ function toggleNavbarColor() {
+        const navbar = document.querySelector(".mdui-toolbar");
+        if (navbar.classList.contains("mdui-color-black")) {
+            navbar.classList.remove("mdui-color-black");
+            navbar.classList.add("mdui-color-theme");
+        } else {
+            navbar.classList.remove("mdui-color-theme");
+            navbar.classList.add("mdui-color-black");
+        }
+    };
+
+<!--进行了搜索栏的数据获取-->
+ document.getElementById('searchButton').addEventListener('click', function() {
+    // 如果当前是显示状态，就隐藏它；否则显示它
+    if (getComputedStyle(searchCard).display === 'block') {
+        searchCard.style.display = 'none';
+    } else {
+        searchCard.style.display = 'block';
+    }
+});
+
+ // 通过点击按钮进行搜索
+    document.getElementById('submitSearch').addEventListener('click', submitSearch);
+// 搜索函数
+function submitSearch() {
+    const query = document.getElementById('searchInput').value;
+    window.location.href = `/search?query=${encodeURIComponent(query)}`; // 使用 encodeURIComponent 以确保查询参数被正确编码
+}
+// 通过按下 Enter 键进行搜索
+    document.getElementById('searchInput').addEventListener('keydown', function(event) {
+        if (event.keyCode === 13 || event.which === 13) { // 13 是 Enter 键的键码
+            submitSearch();
+        }
+    });
+
+</script>
+<!--    导航栏开关-->
+<script>
+  const example = document.querySelector(".example-order");
+  const navigationDrawer = example.querySelector("mdui-navigation-drawer");
+  const openButton = example.querySelector(".open1");
+  openButton.addEventListener("click", () => navigationDrawer.open = true);
+
+</script>
+
+<script>
+  const example2 = document.querySelector(".example-order");
+  const navigationDrawer2 = example2.querySelector("mdui-navigation-drawer");
+  const openButton2 = example2.querySelector(".open2");
+  openButton2.addEventListener("click", () => navigationDrawer.open = true);
+
+</script>
+
+<script>
+  const example3 = document.querySelector(".example-order1");
+  const navigationDrawer3 = example3.querySelector("mdui-navigation-drawer");
+  const openButton3 = example3.querySelector(".open3");
+  openButton3.addEventListener("click", () => navigationDrawer3.open = true);
+
+</script>
+
+
+<script>
+
+ // 中英文文本映射
+const languageMap = {
+    'Home': {'en': 'Home', 'zh': '首页'},
+    'Notes': {'en': 'Notes', 'zh': '笔记'},
+    'Login': {'en': 'Login', 'zh': '登录'},
+    'Audio': {'en': 'Audio', 'zh': '音乐'},
+    'Musik': {'en': 'Musik', 'zh': '背景音乐'},
+    'Show': {'en': 'Show', 'zh': '文章展示'},
+    'Change Color': {'en': 'Change Color', 'zh': '变色'},
+    'Visualization': {'en': 'Visualization', 'zh': '股票可视化'},
+    'Trend': {'en': 'Trend', 'zh': '股票趋势'},
+     'Index': {'en': 'Index', 'zh': '指数分析'},
+    'Chat': {'en': 'Chat', 'zh': '聊天'},
+     'Calculate': {'en': 'Calculate', 'zh': '点名'},
+    'Face Recognition': {'en': 'Face Recognition', 'zh': '人脸识别'},
+     'Face Recognition2': {'en': 'Face Recognition2', 'zh': '人脸识别2'},
+    'Chat': {'en': 'Chat', 'zh': '聊天'},
+    'HR System': {'en': 'HR System', 'zh': 'HR系统'},
+     'Match System': {'en': 'Match System', 'zh': '恋爱管理系统'},
+     'Shanhai': {'en': 'Shanhai', 'zh': '山海经'},
+    'News': {'en': 'News', 'zh': '新闻'},
+    'Information': {'en': 'Information', 'zh': '信息'},
+    'about us': {'en': 'about us', 'zh': '关于我们'}
+};
+// 当前语言状态
+let currentLanguage = 'en';
+
+// 切换语言的函数
+function toggleLanguage() {
+    // 切换当前语言状态：如果当前是英文，则切换到中文，反之亦然
+    currentLanguage = currentLanguage === 'en' ? 'zh' : 'en';
+
+    // 选择页面上所有带有 'mdui-list-item-content' 类的元素
+    document.querySelectorAll('.mdui-list-item-content').forEach(item => {
+        // 遍历 languageMap 的每个键（key）
+        for (let key in languageMap) {
+            // 检查当前元素的文本是否与 languageMap 中当前语言的某个值匹配
+            if (item.textContent.trim() === languageMap[key][currentLanguage === 'en' ? 'zh' : 'en']) {
+                // 如果匹配，更新该元素的文本为新的语言（currentLanguage）下对应的文本
+                item.textContent = languageMap[key][currentLanguage];
+                break; // 找到匹配后，跳出循环
+            }
+        }
+    });
+}
+
+// 绑定点击事件到语言切换按钮
+document.getElementById('languageToggle').addEventListener('click', toggleLanguage);
+
+
+</script>
+
+    </div>
+</body>
+</html>

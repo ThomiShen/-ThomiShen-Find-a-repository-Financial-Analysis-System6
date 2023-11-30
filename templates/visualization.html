@@ -1,0 +1,217 @@
+{% extends "base.html" %}
+
+{% block page_content %}
+
+<html lang="en">
+<head>
+<script src="https://cdn.bootcdn.net/ajax/libs/echarts/5.3.0/echarts.min.js"></script>
+<style>
+    .flex-container {
+        display: flex;
+        align-items: center;  /* 垂直居中对齐内容 */
+    }
+    .flex-container .flex-text {
+        flex: 1;  /* 使用可用空间的全部宽度 */
+        padding: 15px;  /* 为文字部分添加一些填充 */
+    }
+    .flex-container .flex-image {
+        width: 50%;  /* 图片部分的宽度 */
+        padding: 15px;  /* 为图片部分添加一些填充 */
+    }
+
+    .red-text {
+    color: red;
+}
+
+.green-text {
+    color: green;
+}
+</style>
+
+    <meta charset="UTF-8">
+    <title>股票大数据可视化</title>
+</head>
+<body>
+<div class="mdui-container">
+    <div class="mdui-card">
+        <div class="mdui-card-header">
+            <img class="mdui-card-header-avatar" src="{{ url_for('static', filename='reference/牛牛.jpg') }}"/>
+            <div class="mdui-card-header-title">股市可视化分析图表</div>
+            <div class="mdui-card-header-subtitle">Visualization</div>
+          </div>
+
+{% if selected_stocks %}
+<div class="mdui-card-content">
+    <h1>选取股票大全</h1>
+    </div>
+
+   {% for stock in selected_stocks %}
+    <div class="mdui-card">
+        <div class="flex-container">
+            <!-- 文字部分 -->
+            <div class="flex-text">
+                <h4>{{ stock[0][1] }}</h4>
+                <p>{{ stock[0][0] }}</p>
+                <p>行业：{{ stock[0][3] }}</p>
+                 <p>主营业务：{{ stock[0][2] }}</p>
+                <p>总市值: {{ stock[0][4] }}</p>
+                <p>流通市值: {{ stock[0][5] }}</p>
+                <p>60日涨跌幅: {{ stock[0][6] }}%</p>
+{% if  stock[2]>15 %}
+                 <p class="red-text">20日大盘体面指数: {{ stock[2] }}分</p>
+{% else %}
+    <p class="green-text">20日大盘体面指数: {{ stock[2] }}分</p>
+{% endif %}
+{% if  stock[1]>5 %}
+                 <p class="red-text">5日大盘体面指数: {{ stock[1] }}分</p>
+{% else %}
+    <p class="green-text">5日大盘体面指数: {{ stock[1] }}分</p>
+{% endif %}
+            </div>
+
+            <!-- 图片部分 -->
+            <div class="mdui-col-md-6 mdui-col-sm-6">
+                 <div id="echartContainer{{ loop.index }}" style="width: 100%;height:400px;"></div>
+ <script>
+// 基于准备好的dom，初始化echarts实例
+var myChart = echarts.init(document.getElementById('echartContainer{{ loop.index }}'));
+// 提取k_data中的日期和对应的K线数据
+var k_data = {{ stock[0][7] | tojson | safe }};
+var dates = k_data[0];
+var kLineData = k_data.slice(1, 5).map(function (values, index) {
+  // 这里将每个子数组转换为ECharts需要的格式
+  return values.map(function (value, idx) {
+    return [
+      k_data[1][idx], // 开盘价
+      k_data[2][idx], // 收盘价
+      k_data[3][idx], // 最低价
+      k_data[4][idx]  // 最高价
+    ];
+  });
+})[0]; // 取map结果的第一个元素，因为我们只转换了一组数据
+
+// 提取换手率数据
+var turnoverData = k_data[5].map(function(value, idx) {
+  return {
+    value: value,
+    itemStyle: {
+      // 设置颜色与K线图一致，根据涨跌设置颜色
+      color: kLineData[idx][1] > kLineData[idx][0] ? '#ec0000' : '#00da3c',
+      color0: kLineData[idx][1] > kLineData[idx][0] ? '#00da3c' : '#ec0000'
+    }
+  };
+});
+
+// 设置K线图的配置项
+var option = {
+  tooltip: {
+    trigger: 'axis',
+    axisPointer: {
+      type: 'cross'
+    }
+  },
+  grid: [
+    {
+      left: '10%',
+      right: '10%',
+      bottom: '30%',
+      top: '10%'
+    },
+    {
+      left: '10%',
+      right: '10%',
+      height: '15%', // 换手率柱状图的高度
+      bottom: '5%'
+    }
+  ],
+  xAxis: [
+    {
+      type: 'category',
+      data: dates,
+      gridIndex: 0
+    },
+    {
+      type: 'category',
+      data: dates,
+      gridIndex: 1,
+      axisLabel: { show: false } // 不显示下方X轴的标签
+    }
+  ],
+  yAxis: [
+    {
+      scale: true,
+      gridIndex: 0
+    },
+    {
+      type: 'value',
+      gridIndex: 1,
+      splitLine: { show: false } // 不显示网格线
+    }
+  ],
+  series: [
+    {
+      name: '股价K线图',
+      type: 'candlestick',
+      data: kLineData,
+      xAxisIndex: 0,
+      yAxisIndex: 0,
+      itemStyle: {
+        color: '#ec0000',
+        color0: '#00da3c',
+        borderColor: '#8A0000',
+        borderColor0: '#008F28'
+      }
+    },
+    {
+      name: '换手率%',
+      type: 'bar',
+      data: turnoverData,
+      xAxisIndex: 1,
+      yAxisIndex: 1,
+      gridIndex: 1
+    }
+  ]
+};
+
+// 使用刚指定的配置项和数据显示图表。
+myChart.setOption(option);
+
+// 窗口大小变化时，使图表自适应
+window.addEventListener('resize', function() {
+  myChart.resize();
+});
+</script>
+
+           </div>
+        </div>
+    </div>
+{% endfor %}
+
+
+{% endif %}
+        <div class="mdui-card-content">「创业板不来20CM，不亦说乎？龙头战法而不为人知，而不愠，不亦君子乎？」
+          </div>
+    </div>
+    <div class="mdui-m-t-3">
+        <a onclick="goBack()" class="mdui-btn mdui-btn-raised mdui-color-theme mdui-ripple">返回上一页</a>
+    </div>
+</div>
+
+
+</body>
+
+
+<script>
+function goBack() {
+     location.href = "{{ url_for('result') }}";  // Redirect to the 'zhifudaima' route
+};
+window.onload = function() {
+    var selectedStocks = JSON.parse(localStorage.getItem("selectedStocks") || "[]");
+    // Do something with selectedStocks, e.g., display them on the page
+    console.log("Loaded from localStorage:", selectedStocks);
+
+};
+</script>
+
+</html>
+{% endblock %}
